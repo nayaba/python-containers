@@ -242,6 +242,22 @@ colors.extend(['orange'])   # add many
 
 ⚠️ **Gotcha**: `append([3,4])` adds a whole list inside your list. Use `extend()` for flattening.
 
+<details>
+<summary>🔎 Why append vs extend behave differently</summary>
+<hr>  
+- `append(x)` → treats `x` as one single object, no matter what it is.  
+- `extend(x)` → assumes `x` is iterable, so it loops and adds each element.  
+
+That’s why:
+
+```python
+[1,2].append([3,4])  # [1,2,[3,4]]
+[1,2].extend([3,4])  # [1,2,3,4]
+```
+
+</hr>
+</details>
+
 ### Inserting an item
 
 ```python
@@ -298,16 +314,24 @@ for color in colors:
   print(color)
 ```
 
-With index:
+### Iterating with an Index:
 
 ```python
 for idx, color in enumerate(colors):
   print(idx, color)
 ```
 
-<details> <summary>🔎 Why enumerate is better</summary> <hr>
-  
-Without `enumerate`, you’d need something clunky like: ```python for i in range(len(colors)): print(i, colors[i]) ``` `enumerate` gives both index and value cleanly, making code shorter and easier to read. </hr> </details>
+<details>
+<summary>🔎 Why enumerate is better</summary>
+<hr>  
+Without `enumerate`, you’d need something clunky like:  
+```python
+for i in range(len(colors)):
+    print(i, colors[i])
+```  
+`enumerate` gives both index and value cleanly, making code shorter and easier to read.  
+</hr>
+</details>
 
 ---
 
