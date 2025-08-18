@@ -118,6 +118,76 @@ Square brackets make it unambiguous.
 </hr>
 </details>
 
+## 🟨 How `.get()` Works
+
+Normally, you grab dictionary values like this:
+
+```python
+student = { 'name': 'Maria', 'age': 21 }
+print(student['name'])   # Maria
+```
+
+⚠️ **Problem:** If the key doesn’t exist → Python crashes with a `KeyError`:
+
+```python
+print(student['grade'])  # ❌ KeyError
+```
+
+`.get()` fixes this by letting you **safely** try to access a key:
+
+```python
+print(student.get('grade'))  
+# None (instead of an error)
+```
+
+
+### 🟩 Why Use `.get()`
+
+1. **Avoid Crashes**
+
+   * If you’re not sure the key exists, `.get()` prevents your program from blowing up.
+
+2. **Set a Default Value**
+
+   * You can return a fallback value if the key isn’t there:
+
+   ```python
+   print(student.get('grade', 'Not assigned'))
+   # "Not assigned"
+   ```
+
+3. **Cleaner Code**
+
+   * Without `.get()`, you’d have to write an `if` check:
+
+   ```python
+   if 'grade' in student:
+       print(student['grade'])
+   else:
+       print('Not assigned')
+   ```
+
+   With `.get()`, it’s one line.
+
+
+### 🟥 When to Use `.get()`
+
+* When a key **might not exist**.
+* When you want to **provide a default** (like 0, empty list, or message).
+
+👉 Example: Counting items safely:
+
+```python
+inventory = {'apples': 10, 'bananas': 5}
+
+# Get number of oranges (default to 0 if not in inventory)
+oranges = inventory.get('oranges', 0)
+print(oranges)  # 0
+```
+
+✅ In short: use `.get()` any time you want to ask a dictionary for something **without risking an error**.
+
+
 ### Adding items
 
 Assigning to a key that doesn’t exist will make a new item:
