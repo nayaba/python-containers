@@ -10,23 +10,7 @@ By the end of this, you should be able to:
 
 ---
 
-## Road Map 🗺️
-
-1. Setup
-2. Containers (what they are)
-3. Dictionaries
-4. Lists
-5. List Comprehensions
-6. Tuples
-7. Slicing (Copying)
-8. Summary
-9. Big Questions
-
----
-
 ## 1. Setup ⚙️
-
-To follow along:
 
 * Make a new Python project on [replit](https://replit.com/)
 * Call it **Python Containers**
@@ -37,18 +21,33 @@ To follow along:
 
 A **container** is just a place to keep a bunch of stuff together.
 
-👉 In JavaScript, we used **arrays** and **objects**.
-👉 In Python, we mostly use:
+👉 In JavaScript we used **arrays** and **objects**.
+👉 In Python we mostly use:
 
-* **Dictionaries** (like objects in JS)
-* **Lists** (like arrays in JS)
-* **Tuples** (like lists, but unchangeable)
+* **Dictionaries** (lookups, like JS objects)
+* **Lists** (ordered collections, like JS arrays)
+* **Tuples** (lists that can’t change)
+
+<details>
+<summary>🔎 Why Python has different containers</summary>
+<hr>
+
+Python splits containers into different “jobs”:
+
+* **Lists** are best for ordered stuff that changes (like a to-do list).
+* **Tuples** are for fixed stuff that shouldn’t change (like RGB color values).
+* **Dictionaries** are for lookups, like a real dictionary (word → meaning).
+
+This separation keeps your code **clearer** and lets Python **optimize performance** (tuples are faster because they never change).
+
+</hr>
+</details>
 
 ---
 
 ## 3. Dictionaries 📖
 
-Think of a **dictionary** like a real-life dictionary: you look up a **word (key)** to find its **definition (value)**.
+Think of a **dictionary** like a real dictionary: you look up a **word (key)** to find its **definition (value)**.
 
 ```python
 student = {
@@ -58,213 +57,197 @@ student = {
 }
 ```
 
-### What’s cool about dictionaries?
+* You can change values, add new ones, or delete them.
+* Keys must be **immutable** (strings, numbers, tuples).
 
-* You can change values
-* Add new ones
-* Delete ones you don’t need
-* Keys must be unchangeable (like numbers, strings, or tuples)
+⚠️ **Gotcha**: You can’t use lists as keys, because lists can change — that would break the lookup system.
 
-### Getting & setting values
+<details>
+<summary>🔎 Why keys must be immutable</summary>
+<hr>
+
+Imagine if you used a list as a key:
+
+```python
+my_dict = {[1,2]: "hello"}  # ❌
+```
+
+If you later changed that list to `[1,3]`, Python wouldn’t know where to find the value anymore. That’s why only unchangeable types (strings, numbers, tuples) are allowed.
+
+</hr>
+</details>
+
+### Accessing values
 
 ```python
 print(student['name'])   # Maria
 student['name'] = 'Tina'
-print(student['name'])   # Tina
 ```
 
-🚫 You **can’t** use dot notation (`student.name`) like in JS.
+⚠️ **Gotcha**: You can’t do `student.name`. Python doesn’t let dictionaries work with dot notation because it might clash with method names (like `.items()` or `.get()`).
 
-### Avoiding errors
+<details>
+<summary>🔎 Why no dot notation like JS?</summary>
+<hr>
 
-If you ask for a key that doesn’t exist → Python gets mad (`KeyError`).
-Use `.get()` instead:
+In JavaScript, objects are very flexible — properties and methods live in the same space, so `obj.name` is fine.
+
+In Python, dictionary methods (like `.get()` and `.items()`) could be confused with keys. Example:
 
 ```python
-print(student.get('skills'))  
-# None (instead of breaking your code)
+student = {"items": "something"}
+print(student.items)  # Uh oh! method or data?
 ```
 
-You can even give it a default:
+Square brackets make it unambiguous.
 
-```python
-print(student.get('skills', {'HTML': 5}))
-```
-
-### Checking keys
-
-```python
-if 'course' in student:
-  print("Student has a course!")
-```
-
----
-
-### Practice 📝
-
-Make a dictionary called `where_my_things_are`.
-
-* Keys = your stuff (like “backpack”)
-* Values = where they are (like “bedroom”)
-* Loop through and print:
-
-  > My backpack is kept in the bedroom
+</hr>
+</details>
 
 ---
 
 ## 4. Lists 📋
 
-A **list** is just a line of items in order.
-Think: **grocery list**.
+Lists are like grocery lists.
 
 ```python
 colors = ['red', 'green', 'blue']
 ```
 
-Lists can grow, shrink, and change.
+* They can grow, shrink, or change.
+* They keep order.
 
-### Accessing items
+⚠️ **Gotcha**: Assigning to a position that doesn’t exist → `IndexError`.
 
-```python
-print(colors[0])   # red
-print(colors[-1])  # blue (last one)
-```
+<details>
+<summary>🔎 Why lists allow negative indexing</summary>
+<hr>
 
-### Changing items
-
-```python
-colors[1] = 'yellow'
-```
-
-### Adding items
+Python made `colors[-1]` mean “last item” so you don’t have to type:
 
 ```python
-colors.append('purple')  # adds at the end
-colors.extend(['orange', 'black'])  # add many
+colors[len(colors)-1]
 ```
 
-### Removing items
+It’s shorter and easier for beginners. Negative indexing also matches how people think of “counting from the end.”
 
-```python
-colors.remove('orange')
-last = colors.pop()  # remove last and save it
-```
-
----
-
-### Practice 📝
-
-1. Make a list called `scores` with at least one dictionary:
-
-```python
-{'name': 'player1', 'points': 25}
-```
-
-2. Add another score with `append()`.
-3. Loop through and print:
-
-> player1 scored 25 points
+</hr>
+</details>
 
 ---
 
 ## 5. List Comprehensions ⚡
 
-Fancy word for “making a list in one line.”
+Shortcut for making lists.
 
-Without comprehension:
+Normal way:
 
 ```python
-nums = [1, 2, 3, 4]
 squares = []
-for n in nums:
-  squares.append(n * n)
+for n in range(5):
+    squares.append(n*n)
 ```
 
-With comprehension:
+Comprehension way:
 
 ```python
-squares = [n * n for n in nums]
+squares = [n*n for n in range(5)]
 ```
 
-### Filtering too
+<details>
+<summary>🔎 Why Python uses comprehensions</summary>
+<hr>
 
-```python
-even_squares = [n*n for n in nums if n*n % 2 == 0]
-```
+Python is built around the idea of **readable, expressive code**. A comprehension is like saying:
+
+> “I want `n*n` for each `n` in my list.”
+
+It matches how you’d explain it in English and makes code shorter without losing clarity.
+
+</hr>
+</details>
+
+⚠️ **Gotcha**: If you reuse variable names inside, they overwrite outside ones.
 
 ---
 
 ## 6. Tuples 🎁
 
-A **tuple** is like a list you **can’t change**.
+Tuples = lists you can’t change.
 
 ```python
 colors = ('red', 'green', 'blue')
 ```
 
-Why use them?
+⚠️ **Gotcha**: A single-item tuple needs a comma → `(5,)`.
 
-* Safer (no one can mess with your data)
-* Faster than lists
-* Can be used as dictionary keys
+<details>
+<summary>🔎 Why tuples exist if we already have lists</summary>
+<hr>
 
-### Cool trick: Unpacking
+* Tuples are **faster** because Python doesn’t have to worry about changes.
+* They’re **safer**: data can’t be accidentally changed.
+* They can be used as **dictionary keys**, unlike lists.
 
-```python
-r, g, b = colors
-print(r)  # red
-```
+Think of them like a **locked box** versus a list, which is a **backpack you can add/remove from anytime**.
+
+</hr>
+</details>
 
 ---
 
-## 7. Slicing (Copying) ✂️
+## 7. Slicing ✂️
 
-Want part of a list/tuple/string? Slice it!
+Take part of a list/tuple/string.
 
 ```python
 name = "Alexandria"
 print(name[0:4])  # Alex
 ```
 
-* `[:n]` → from start to n
-* `[m:]` → from m to end
-* `[:]` → whole thing (copy)
+⚠️ **Gotcha**: Slice end index is **exclusive**. `[0:4]` gives indices 0,1,2,3.
 
-Also works to replace parts of a list:
+<details>
+<summary>🔎 Why slice end index is exclusive</summary>
+<hr>
+
+This makes it easy to see how big your slice is:
 
 ```python
-letters = ['a','b','x','y','d']
-letters[2:4] = ['c']
-print(letters)  # ['a','b','c','d']
+letters[2:5]  # has 3 items (5-2 = 3)
 ```
+
+It also plays nice with zero-based indexing and loops.
+
+</hr>
+</details>
+
+👉 Pro Tip: `[:]` makes a full copy of a list. This is often safer than assigning one list to another.
 
 ---
 
 ## 8. Summary 📝
 
-* **Dictionaries** = lookups (key → value)
+* **Dictionaries** = key → value (like lookups)
 * **Lists** = ordered, editable collections
-* **Tuples** = lists that can’t change
-* **List comprehensions** = quick one-liners for lists
-* **Slicing** = grab a chunk of a sequence
+* **Tuples** = lists that don’t change
+* **List comprehensions** = shortcuts for making new lists
+* **Slicing** = grab chunks of a sequence
 
 ---
 
 ## 9. Essential Questions ❓
 
-1. What’s the main difference between a list and a tuple?
+1. Difference between a list and a tuple?
    👉 Lists can change, tuples can’t.
 
 2. Why doesn’t `fruit.bananas` work?
-   👉 Because dictionaries need **square brackets**: `fruit['bananas']`.
+   👉 Dictionaries use `[]`, not dot notation.
 
-3. What’s it called when we do:
+3. What’s happening here?
 
 ```python
 one, two, three = 'abc'
 ```
 
-👉 **Unpacking**.
-Here, `two = 'b'`.
-
----
+👉 That’s **unpacking**. `two = 'b'`.
