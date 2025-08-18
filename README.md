@@ -111,8 +111,13 @@ Assigning to a key that doesn’t exist will make a new item:
 ```python
 student['age'] = 21
 ```
-
 ⚠️ **Gotcha**: If the key already exists, the value just gets updated.
+
+<details> <summary>🔎 Why adding this way works</summary> <hr> When you do `student['age'] = 21`, Python checks if `'age'` already exists: - If yes → update the value. - If no → create a new key-value pair.
+
+This makes dictionaries flexible — no need for special “add” commands.
+
+</hr> </details>
 
 ### Deleting items
 
@@ -124,6 +129,12 @@ del student['age']
 
 ⚠️ **Gotcha**: `del` doesn’t return anything — it just deletes.
 
+<details> <summary>🔎 Why use <code>del</code> instead of setting to None?</summary> <hr> - `del student['age']` → actually removes the pair. - `student['age'] = None` → keeps the key but gives it a placeholder value.
+
+Use del when you truly want it gone.
+
+</hr> </details>
+
 ### Number of items
 
 Use `len()` to count how many pairs are inside:
@@ -131,6 +142,8 @@ Use `len()` to count how many pairs are inside:
 ```python
 len(student)  # 3
 ```
+
+<details> <summary>🔎 Why len works on dictionaries</summary> <hr> `len()` works on any container. For dictionaries, it counts how many key-value pairs exist. Behind the scenes, Python just checks how many keys are stored in the hash table. </hr> </details>
 
 ### Iterating
 
@@ -147,6 +160,12 @@ Better way:
 for key, val in student.items():
   print(key, val)
 ```
+
+<details> <summary>🔎 Why <code>.items()</code> is better than looping keys</summary> <hr> - `for key in student:` only gives keys. Then you must do `student[key]` to get the value. - `for key, val in student.items():` gives both directly and is more efficient.
+
+That’s why looping just keys is considered an “anti-pattern.”
+
+</hr> </details>
 
 ---
 
@@ -173,6 +192,8 @@ colors = ['red', 'green', 'blue']
 * They keep order.
 
 ⚠️ **Gotcha**: Assigning to a position that doesn’t exist → `IndexError`.
+
+<details> <summary>🔎 Why negative indexes exist</summary> <hr> Negative indexes save typing: - Instead of `colors[len(colors)-1]` → just `colors[-1]`. Python added this to make life easier for beginners and to mirror real-world thinking (“last one, second-to-last one”). </hr> </details>
 
 <details>
 <summary>🔎 Why lists allow negative indexing</summary>
@@ -214,6 +235,12 @@ colors.extend(['orange'])   # add many
 colors.insert(1, 'yellow')
 ```
 
+<details> <summary>🔎 Why insert exists</summary> <hr> Unlike `append()`, `insert()` lets you control *exactly* where the new item goes. This is useful when order matters (e.g., keeping a sorted list).
+
+⚠️ Gotcha: Inserting at the front of long lists is slower, because Python has to “shift” everything down.
+
+</hr> </details>
+
 ### Removing items
 
 ```python
@@ -222,11 +249,28 @@ colors.pop(1)       # remove at index
 colors.remove('red') # remove first match
 ```
 
+<details> <summary>🔎 Why multiple remove options exist</summary> <hr> - `pop(index)` → use when you know *where* the item is. - `remove(value)` → use when you know *what* the item is.
+
+⚠️ Gotcha:
+
+- `pop()` returns the item (handy if you need it).
+
+- `remove()` doesn’t return anything.
+
+</hr> </details>
+
 ### Clearing the list
 
 ```python
 colors.clear()
 ```
+
+<details> <summary>🔎 Why not just reassign to []?</summary> 
+<hr> `colors = []` → makes a new empty list, but the old one still exists in memory if something else references it. - `colors.clear()` → empties the list in-place, so anything else pointing to it sees it empty too.
+
+⚠️ Gotcha: If multiple variables reference the same list, `.clear()` affects all of them.
+
+</hr> </details>
 
 ### Iterating
 
@@ -241,6 +285,8 @@ With index:
 for idx, color in enumerate(colors):
   print(idx, color)
 ```
+
+<details> <summary>🔎 Why enumerate is better</summary> <hr> Without `enumerate`, you’d need something clunky like: ```python for i in range(len(colors)): print(i, colors[i]) ``` `enumerate` gives both index and value cleanly, making code shorter and easier to read. </hr> </details>
 
 ---
 
@@ -315,6 +361,8 @@ print(colors.index('blue'))  # 2
 for color in colors:
   print(color)
 ```
+
+<details> <summary>🔎 Why iterate if tuples can’t change?</summary> <hr> Tuples are often used for **fixed records** (like coordinates `(x,y)`). Iterating lets you read through their values just like lists, even if you can’t edit them. </hr> </details>
 
 ### Unpacking
 
