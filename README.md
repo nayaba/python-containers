@@ -375,36 +375,66 @@ for i in range(len(colors)):
 
 ## 5. List Comprehensions ⚡
 
-Shortcut for making lists.
+A **list comprehension** is a shortcut for making a new list.
+It lets you write in **one line** what would normally take several lines with a loop.
 
-Normal way:
+**Basic structure:**
 
 ```python
+[ expression for item in iterable if condition ]
+```
+
+* **expression** → what to do with each item
+* **item** → each element as you loop through
+* **iterable** → the thing you’re looping over (list, string, etc.)
+* **if condition** (optional) → only include items that match
+
+
+## Example 1: Squaring Numbers
+
+**Normal way (with a loop):**
+
+```python
+nums = [1, 2, 3, 4, 5]
 squares = []
-for n in range(5):
-    squares.append(n*n)
+for n in nums:
+    squares.append(n * n)
+
+print(squares)  # [1, 4, 9, 16, 25]
 ```
 
-Comprehension way:
+**List comprehension way:**
 
 ```python
-squares = [n*n for n in range(5)]
+squares = [n * n for n in nums]
+print(squares)  # [1, 4, 9, 16, 25]
 ```
 
-<details>
-<summary>🔎 Why Python uses comprehensions</summary>
-<hr>
+👉 Same result, less code.
 
-Python is built around the idea of **readable, expressive code**. A comprehension is like saying:
 
-> “I want `n*n` for each `n` in my list.”
+## Example 2: Transforming Strings
 
-It matches how you’d explain it in English and makes code shorter without losing clarity.
+Let’s make a list of uppercase names:
 
-</hr>
-</details>
+```python
+names = ['maria', 'john', 'sam']
+shouting = [name.upper() for name in names]
+print(shouting)  # ['MARIA', 'JOHN', 'SAM']
+```
 
-⚠️ **Gotcha**: If you reuse variable names inside, they overwrite outside ones.
+
+⚠️ **Gotchas with List Comprehensions**
+
+* They always make a **new list** (they don’t modify the original).
+* If the logic is complicated, a comprehension can make code *harder* to read → better to use a normal `for` loop.
+* Variables used inside a comprehension can overwrite outside ones:
+
+```python
+n = 100
+nums = [n for n in range(3)]
+print(n)  # 2 (not 100 anymore!)
+```
 
 ---
 
