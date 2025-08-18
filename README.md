@@ -104,6 +104,61 @@ Square brackets make it unambiguous.
 </hr>
 </details>
 
+### Adding items
+
+Assigning to a key that doesn’t exist will make a new item:
+
+```python
+student['age'] = 21
+```
+
+⚠️ **Gotcha**: If the key already exists, the value just gets updated.
+
+### Deleting items
+
+Use `del` to delete:
+
+```python
+del student['age']
+```
+
+⚠️ **Gotcha**: `del` doesn’t return anything — it just deletes.
+
+### Number of items
+
+Use `len()` to count how many pairs are inside:
+
+```python
+len(student)  # 3
+```
+
+### Iterating
+
+Bad way:
+
+```python
+for key in student:
+  print(key, student[key])  # works but not clean
+```
+
+Better way:
+
+```python
+for key, val in student.items():
+  print(key, val)
+```
+
+---
+
+🎓 **You Do**:
+Make a dictionary called `where_my_things_are`.
+
+* Keys = things you own
+* Values = where you keep them
+* Loop and print:
+
+> My backpack is kept in my bedroom
+
 ---
 
 ## 4. Lists 📋
@@ -133,6 +188,59 @@ It’s shorter and easier for beginners. Negative indexing also matches how peop
 
 </hr>
 </details>
+
+### Accessing items
+
+```python
+print(colors[0])    # red
+print(colors[-1])   # blue (last)
+print(colors[-2])   # green (second to last)
+```
+
+⚠️ **Gotcha**: Negative numbers mean “count from the end.”
+
+### Adding items
+
+```python
+colors.append('purple')     # add one
+colors.extend(['orange'])   # add many
+```
+
+⚠️ **Gotcha**: `append([3,4])` adds a whole list inside your list. Use `extend()` for flattening.
+
+### Inserting an item
+
+```python
+colors.insert(1, 'yellow')
+```
+
+### Removing items
+
+```python
+colors.pop()        # remove last
+colors.pop(1)       # remove at index
+colors.remove('red') # remove first match
+```
+
+### Clearing the list
+
+```python
+colors.clear()
+```
+
+### Iterating
+
+```python
+for color in colors:
+  print(color)
+```
+
+With index:
+
+```python
+for idx, color in enumerate(colors):
+  print(idx, color)
+```
 
 ---
 
@@ -194,6 +302,27 @@ Think of them like a **locked box** versus a list, which is a **backpack you can
 </hr>
 </details>
 
+### Accessing items
+
+```python
+print(colors[1])   # green
+print(colors.index('blue'))  # 2
+```
+
+### Iteration
+
+```python
+for color in colors:
+  print(color)
+```
+
+### Unpacking
+
+```python
+r, g, b = colors
+print(r)  # red
+```
+
 ---
 
 ## 7. Slicing ✂️
@@ -203,6 +332,8 @@ Take part of a list/tuple/string.
 ```python
 name = "Alexandria"
 print(name[0:4])  # Alex
+print(name[:4])   # Alex
+print(name[4:])   # andria
 ```
 
 ⚠️ **Gotcha**: Slice end index is **exclusive**. `[0:4]` gives indices 0,1,2,3.
@@ -226,7 +357,38 @@ It also plays nice with zero-based indexing and loops.
 
 ---
 
-## 8. Summary 📝
+## 8. Sets 🧩
+
+A **set** is like a bag of unique items. No duplicates allowed, no order guaranteed.
+
+```python
+fruits = {'apple', 'banana', 'orange'}
+```
+
+Or:
+
+```python
+fruits = set(['apple', 'banana'])
+```
+
+### Adding
+
+```python
+fruits.add('pear')
+```
+
+### Removing
+
+```python
+fruits.remove('banana')
+```
+
+⚠️ **Gotcha**: Since sets are unordered, you can’t access items by index like `fruits[0]`.
+
+---
+
+
+## 9. Summary 📝
 
 * **Dictionaries** = key → value (like lookups)
 * **Lists** = ordered, editable collections
@@ -236,7 +398,7 @@ It also plays nice with zero-based indexing and loops.
 
 ---
 
-## 9. Essential Questions ❓
+## 10. Essential Questions ❓
 
 1. Difference between a list and a tuple?
    👉 Lists can change, tuples can’t.
