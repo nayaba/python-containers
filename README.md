@@ -425,6 +425,8 @@ fruits = set(['apple', 'banana'])
 fruits.add('pear')
 ```
 
+<details> <summary>🔎 Why no indexes?</summary> <hr> Sets are unordered → you can’t say “add at position 2.” Python doesn’t guarantee order, so `add()` just throws it in anywhere. </hr> </details>
+
 ### Removing
 
 ```python
@@ -432,6 +434,16 @@ fruits.remove('banana')
 ```
 
 ⚠️ **Gotcha**: Since sets are unordered, you can’t access items by index like `fruits[0]`.
+
+<details> <summary>🔎 Why remove by value only</summary> <hr> Because sets have no order or index, the *only way* to remove is by value.
+
+⚠️ Gotcha:
+
+`.remove(x)` → crashes if x isn’t there.
+
+`.discard(x)` → safely does nothing if x isn’t there.
+
+</hr> </details>
 
 ---
 
