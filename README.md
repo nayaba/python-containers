@@ -22,6 +22,7 @@ By the end of this, you should be able to:
 A **container** is just a place to keep a bunch of stuff together.
 
 👉 In JavaScript we used **arrays** and **objects**.
+
 👉 In Python we mostly use:
 
 * **Dictionaries** (lookups, like JS objects)
