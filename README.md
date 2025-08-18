@@ -50,6 +50,19 @@ This separation keeps your code **clearer** and lets Python **optimize performan
 
 Think of a **dictionary** like a real dictionary: you look up a **word (key)** to find its **definition (value)**.
 
+**Basic Structure:**
+
+```python
+my_dict = { key: value, key2: value2 }
+```
+
+* **key** → the “name” you’ll use to look things up (must be immutable, like a string, number, or tuple).
+* **value** → the information stored under that key (can be anything: number, string, list, etc.).
+* **{ } (curly braces)** → tell Python you’re making a dictionary.
+* **, (comma)** → separates items (each key\:value pair).
+
+👉 Example:
+
 ```python
 student = {
   'name': 'Maria',
@@ -195,6 +208,19 @@ Make a dictionary called `where_my_things_are`.
 ## 4. Lists 📋
 
 Lists are like grocery lists.
+
+**Basic Structure:**
+
+```python
+my_list = [ item1, item2, item3 ]
+```
+
+* **item1, item2…** → the things you’re storing.
+* **\[ ] (square brackets)** → tell Python you’re making a list.
+* **, (comma)** → separates items.
+* **order matters** → the first item is at index 0, the second at index 1, etc.
+
+👉 Example:
 
 ```python
 colors = ['red', 'green', 'blue']
@@ -442,6 +468,19 @@ print(n)  # 2 (not 100 anymore!)
 
 Tuples = lists you can’t change.
 
+**Basic Structure:**
+
+```python
+my_tuple = ( item1, item2, item3 )
+```
+
+* **item1, item2…** → values you’re storing (like a list).
+* **( ) (parentheses)** → tell Python you’re making a tuple.
+* **, (comma)** → separates items.
+* **immutable** → once created, you can’t change the items.
+
+👉 Example:
+
 ```python
 colors = ('red', 'green', 'blue')
 ```
@@ -523,6 +562,19 @@ It also plays nice with zero-based indexing and loops.
 ## 8. Sets 🧩
 
 A **set** is like a bag of unique items. No duplicates allowed, no order guaranteed.
+
+**Basic Structure:**
+
+```python
+my_set = { item1, item2, item3 }
+```
+
+* **item1, item2…** → elements inside the set.
+* **{ } (curly braces)** → tell Python you’re making a set.
+* **no duplicates** → if you try to add a repeat, it disappears.
+* **unordered** → Python doesn’t guarantee items stay in the same order.
+
+👉 Example:
 
 ```python
 fruits = {'apple', 'banana', 'orange'}
